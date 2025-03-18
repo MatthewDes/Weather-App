@@ -1,9 +1,8 @@
 import requests
 from location import city 
 from api import api_key
+from weather_graph import make_graph
 
-
-#city = "London"
 
 def get_weather(city):
 
@@ -48,7 +47,6 @@ def get_5_day_forecast(city):
         print(f"{date}: {info['weather']}, {info['temperature']}°C")
     print("\n")
 
-
 def display_weather(city):
     response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric')
     test = response.json()
@@ -59,18 +57,25 @@ def display_weather(city):
     get_weather(city)
     get_5_day_forecast(city)
     
+def ask_graph(): 
+    question = input("Would you like to see a graph of the temperature for the next 24 hours? (yes/no): ").strip().lower()
+    if question == "yes":
+        make_graph(city)
+
+
+
 
 display_weather(city)
+ask_graph()
 
-
-#print("Would you like to find out the weather for another city?")
+#ask user if they want to find out the weather for another city
 while True:
     question = input("Would you like to find out the weather for another city? (yes/no): ").strip().lower()
     if question != "yes":
         print("Thank you for using the weather app!")
         break
     city = input("Enter city name: ").strip().title()
-
     display_weather(city)
+    ask_graph()
     
 
