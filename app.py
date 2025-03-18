@@ -1,7 +1,7 @@
 import requests
 from location import city 
+from api import api_key
 
-api_key = "d01647675b2bb6d5e9c542cfcbbe1ff6"
 
 #city = "London"
 
